@@ -4,29 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My To-Do List</title>
-
-  <!-- Attached CSS file -->
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Quick extra styling for the input and buttons */
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+    }
+    button.add-btn {
+      padding: 10px 15px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button.add-btn:hover {
+      background: #5563c1;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li button {
+      background: #ff5252;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    li button:hover {
+      background: #e04141;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Card container for CSS styling -->
   <div class="todo-container">
-    <h1>My To-Do List</h1>
-    <input id="task" placeholder="Enter a task">
-    <button onclick="addTask()">Add</button>
+    <h1>My To-Do List 📝</h1>
+    
+    <div class="input-group">
+      <input id="task" placeholder="Enter a new task..." autofocus>
+      <button class="add-btn" onclick="addTask()">Add</button>
+    </div>
+
     <ul id="tasks"></ul>
   </div>
 
   <script>
-    function addTask() {
-      const input = document.getElementById("task");
-      if (!input.value.trim()) return;
+    const input = document.getElementById("task");
+    const taskList = document.getElementById("tasks");
 
-      const item = document.createElement("li");
-      item.textContent = input.value;
-      document.getElementById("tasks").appendChild(item);
+    // Load saved tasks when the page opens
+    document.addEventListener("DOMContentLoaded", loadTasks);
+
+    // Allow pressing "Enter" to add a task
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        addTask();
+      }
+    });
+
+    function addTask() {
+      const taskText = input.value.trim();
+      if (!taskText) return;
+
+      createTaskElement(taskText);
+      saveTasks();
       input.value = "";
+    }
+
+    function createTaskElement(text) {
+      const li = document.createElement("li");
+      li.textContent = text;
+
+      // Create Delete Button
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = function() {
+        li.remove();
+        saveTasks();
+      };
+
+      li.appendChild(deleteBtn);
+      taskList.appendChild(li);
+    }
+
+    // Save tasks to browser memory (localStorage)
+    function saveTasks() {
+      const tasks = [];
+      document.querySelectorAll("#tasks li").forEach(li => {
+        // Get text without the "Delete" button text
+        tasks.push(li.firstChild.textContent);
+      });
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    // Load tasks from browser memory
+    function loadTasks() {
+      const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      savedTasks.forEach(taskText => createTaskElement(taskText));
     }
   </script>
 </body>
