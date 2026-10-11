@@ -1,10 +1,11 @@
 /* Import a nice modern font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Basic Reset & Styling */
+/* Basic Reset & Styling with your Yellow Workspace Background */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: url('https://static.vecteezy.com/system/resources/previews/024/945/454/large_2x/white-sheet-with-to-do-list-phrase-and-black-pen-on-yellow-background-stock-photo.jpg') no-repeat center center fixed;
+    background-size: cover;
     height: 100vh;
     margin: 0;
     display: flex;
