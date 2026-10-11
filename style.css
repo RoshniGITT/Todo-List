@@ -1,10 +1,10 @@
 /* Import a nice modern font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Basic Reset & Styling with your Yellow Workspace Background */
+/* Basic Reset & Styling with your new 3D To-Do List Background */
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('https://static.vecteezy.com/system/resources/previews/024/945/454/large_2x/white-sheet-with-to-do-list-phrase-and-black-pen-on-yellow-background-stock-photo.jpg') no-repeat center center fixed;
+    background: url('https://static.vecteezy.com/system/resources/previews/012/146/739/non_2x/to-do-list-icon-a-notebook-with-a-completed-todo-list-3d-render-photo.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     margin: 0;
@@ -15,10 +15,10 @@ body {
 
 /* To-Do List Card Container */
 .todo-container {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95); /* Slight transparency so it blends nicely */
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     width: 350px;
 }
 
